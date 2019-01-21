@@ -102,6 +102,16 @@ namespace JapaneseEraSandBox
 //                        , null)
 //                    , n);
                 
+                ////.NET2.0までのコンストラクタ（ActivatorもしくはAssembly）
+                //var newEra = Activator.CreateInstance(eraInfoType, BindingFlags.NonPublic | BindingFlags.Instance, null,
+                //    new object[] { i + 1, (new DateTime(Year, Month, Day)).Ticks, Year - 1, minYear, maxYear }, null);
+                //new_EraInfo.SetValue(newEra, n);
+                //new_EraInfo.SetValue(eraInfoType.Assembly.CreateInstance(eraInfoType.FullName,
+                //    false, 
+                //    BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static, null,
+                //    new object[] { i + 1, (new DateTime(Year, Month, Day)).Ticks, Year - 1, minYear, maxYear },
+                //    null, null), n);
+
                 new_eras[i] = len - i;
                 n++;
             }
@@ -110,6 +120,12 @@ namespace JapaneseEraSandBox
             FieldInfo erasFieldInfo = helperType.GetField("m_eras", BindingFlags.NonPublic |
                                                                     BindingFlags.Instance |
                                                                     BindingFlags.Static);
+
+            ////.NET2.0の場合
+            //FieldInfo erasFieldInfo = helperType.GetField("m_eras", BindingFlags.NonPublic |
+            //                                                        BindingFlags.Instance |
+            //                                                        BindingFlags.Static);
+
             erasFieldInfo.SetValue(helper, new_eras);
         }
     }
